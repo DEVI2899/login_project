@@ -5,12 +5,13 @@ const userService = new UserService();
 const jwt = require('jsonwebtoken');
 
 class UserController {
-
-
     async register(req, res) {
         try {
             const { username, email, password } = req.body;
             const user = await userService.registerUser(username, email, password);
+            if (user.length> 0) {
+              return res.status(400).json({ message: 'User already registered with this email' });
+           }
             res.json(user);
         } catch (err) {
             res.status(500).send({ message: err.message });
@@ -27,6 +28,7 @@ class UserController {
             res.status(500).send({ message: err.message });
         }
     }
+
 }
 
 module.exports = new UserController();

@@ -36,7 +36,6 @@ class UrlPage extends StatelessWidget {
                   embeddedImageStyle: const QrEmbeddedImageStyle(
                     size: Size.square(40),
                     color: Colors.white,
-
                   ),
                 ),
               ),
