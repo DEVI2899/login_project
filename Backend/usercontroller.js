@@ -58,6 +58,23 @@ class UserController {
              }
          }
 
+         async getUsers(req, res) {
+             const users = await userService.getUsers();
+              if (!users) {
+                 return res.status(401).json({ message: 'User List Empty' });
+                }else{
+                 return res.json(users);
+             }
+           }
+           async getUsersId(req, res) {
+                        const users = await userService.getUsersId(req.params.id);
+                         if (!users) {
+                            return res.status(401).json({ message: 'User id Empty' });
+                           }else{
+                            return res.json(users);
+                        }
+                      }
+
 }
 
 module.exports = new UserController();

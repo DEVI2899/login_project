@@ -33,6 +33,29 @@ class UserService {
 
         }
 
+   async getUsers() {
+        try {
+            let pool = await poolPromise;
+            let registerUser = await pool.request()
+            .query("SELECT * from users");
+            return registerUser.recordset;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+     async getUsersId(id) {
+             try {
+                 let pool = await poolPromise;
+                 let registerUser = await pool.request()
+                 .input('input_parameter', sql.Int, id)
+                 .query("SELECT * from users where Id = @input_parameter");
+                 return registerUser.recordset;
+             }
+             catch (error) {
+                 console.log(error);
+             }
+         }
 
 
 }
